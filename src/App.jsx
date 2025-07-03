@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from './Component/Nav';
 import Hero from './Component/Hero';
 import About from './Component/About';
+import SkillsSection from './Component/Skills';
 
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
       <Navbar />
       <Hero />
       <About />
+      <SkillsSection />
     </div>
   );
 }

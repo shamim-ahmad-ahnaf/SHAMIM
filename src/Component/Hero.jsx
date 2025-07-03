@@ -1,12 +1,19 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { FaArrowRight, FaFacebookF, FaGithub, FaLinkedinIn,FaDownload } from "react-icons/fa";
-import me from "../../public/mh.png"; // Make sure to replace with your actual image path
+import { FaArrowRight, FaFacebookF, FaGithub, FaLinkedinIn, FaDownload } from "react-icons/fa";
+import me from "../../public/mh.png";
 
 const socialLinks = [
   { icon: <FaFacebookF />, href: "https://facebook.com", label: "Facebook", color: "#1877F2" },
   { icon: <FaGithub />, href: "https://github.com", label: "GitHub", color: "#333" },
   { icon: <FaLinkedinIn />, href: "https://linkedin.com", label: "LinkedIn", color: "#0A66C2" },
+];
+
+const skillsToType = [
+  "React Developer",
+  "JavaScript Enthusiast",
+  "Tailwind CSS Expert",
+  "Frontend Engineer"
 ];
 
 const containerVariant = {
@@ -37,23 +44,42 @@ const imageVariant = {
   },
 };
 
-const iconVariant = {
-  hidden: { scale: 0.8, opacity: 0 },
-  visible: {
-    scale: 1,
-    opacity: 1,
-    transition: { duration: 0.5, ease: "easeInOut" },
-  },
-};
-
 export default function Hero() {
+  const [text, setText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [loopNum, setLoopNum] = useState(0);
+  const [typingSpeed, setTypingSpeed] = useState(100);
+
+  useEffect(() => {
+    const handleType = () => {
+      const i = loopNum % skillsToType.length;
+      const fullText = skillsToType[i];
+      const updatedText = isDeleting
+        ? fullText.substring(0, text.length - 1)
+        : fullText.substring(0, text.length + 1);
+
+      setText(updatedText);
+
+      if (!isDeleting && updatedText === fullText) {
+        setTimeout(() => setIsDeleting(true), 1500);
+      } else if (isDeleting && updatedText === "") {
+        setIsDeleting(false);
+        setLoopNum(loopNum + 1);
+      }
+
+      setTypingSpeed(isDeleting ? 50 : 100);
+    };
+
+    const timer = setTimeout(handleType, typingSpeed);
+    return () => clearTimeout(timer);
+  }, [text, isDeleting, loopNum]);
+
   return (
     <section
       id="home"
       className="min-h-screen flex items-center justify-center bg-gradient-to-r from-green-50 to-white px-6 relative overflow-hidden"
     >
-     <div className="max-w-7xl mx-auto flex flex-col-reverse md:flex-row items-center gap-12 py-20">
-
+      <div className="max-w-7xl mx-auto flex flex-col-reverse md:flex-row items-center gap-12 py-20">
         {/* Text Content */}
         <motion.div
           className="flex-1 space-y-6 text-center md:text-left"
@@ -63,11 +89,36 @@ export default function Hero() {
           variants={containerVariant}
         >
           <motion.h1
-            className="text-5xl font-extrabold text-green-900 leading-tight"
+            className="text-5xl font-extrabold text-green-900 leading-tight drop-shadow-xl"
             variants={textVariant}
+            animate={{
+              scale: [1, 1.05, 1],
+              rotate: [0, 2, -2, 0],
+              textShadow: [
+                "0 0 10px rgba(34,197,94,0.8)",
+                "0 0 30px rgba(34,197,94,1)",
+                "0 0 10px rgba(34,197,94,0.8)"
+              ]
+            }}
+            transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
           >
             Hi, I’m <span className="text-green-600">Shamim Ahmad </span>
           </motion.h1>
+
+          <motion.p
+            className="text-green-700 text-2xl font-semibold h-10 min-h-[2.5rem]"
+            variants={textVariant}
+          >
+            {text}
+            <motion.span
+              className="text-green-600"
+              animate={{ opacity: [0, 1, 0] }}
+              transition={{ repeat: Infinity, duration: 1 }}
+            >
+              |
+            </motion.span>
+          </motion.p>
+
 
           <motion.p
             className="text-gray-700 text-lg max-w-lg mx-auto md:mx-0 leading-relaxed"
@@ -91,7 +142,6 @@ export default function Hero() {
                   "0 0 24px 12px rgba(132, 204, 22, 0.5)",
                   "0 0 12px 6px rgba(132, 204, 22, 0.4)",
                 ],
-
               }}
               whileHover={{
                 scale: 1.1,
@@ -106,7 +156,7 @@ export default function Hero() {
 
             {/* Download CV Button */}
             <motion.a
-              href="/path/to/your-cv.pdf"
+              href="../../public/SHAMIM.pdf" // Adjust the path to your CV file
               download
               className="inline-flex items-center gap-2 border-2 border-green-600 text-green-600 px-6 py-3 rounded-full font-semibold cursor-pointer select-none hover:bg-green-600 hover:text-white transition"
               style={{
@@ -115,7 +165,6 @@ export default function Hero() {
                   "0 0 24px 12px rgba(132, 204, 22, 0.5)",
                   "0 0 12px 6px rgba(132, 204, 22, 0.4)",
                 ],
-
               }}
               whileHover={{
                 scale: 1.1,
@@ -183,7 +232,6 @@ export default function Hero() {
                 </motion.a>
               );
             })}
-
           </motion.div>
         </motion.div>
 

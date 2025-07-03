@@ -41,13 +41,13 @@ export default function About() {
         variants={container}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }} // animation scroll sensitive
+        viewport={{ once: true, amount: 0.2 }}
       >
-        {/* Image First on Mobile */}
+        {/* Image */}
         <motion.div
           variants={imageItem}
           className="relative flex justify-center md:justify-end rounded-3xl overflow-hidden cursor-pointer
-          bg-gradient-to-tr from-green-200 to-green-400 shadow-lg shadow-green-300 max-w-xs w-full mx-auto order-1 md:order-2"
+            bg-gradient-to-tr from-green-200 to-green-400 shadow-lg shadow-green-300 max-w-xs w-full mx-auto order-1 md:order-2"
           whileHover={{
             scale: 1.15,
             rotate: 6,
@@ -68,16 +68,29 @@ export default function About() {
           <img
             src={me}
             alt="Shamim Ahmad Ahanaf"
-            className="rounded-3xl w-full h-100 object-cover select-none"
+            className="rounded-full w-full h-100 object-cover select-none"
             draggable={false}
           />
         </motion.div>
 
         {/* Text Content */}
         <motion.div variants={textItem} className="space-y-8 order-2 md:order-1">
-          <h2 className="text-5xl md:text-6xl font-extrabold text-green-900 tracking-tight leading-tight">
+          <motion.h2
+            className="text-5xl md:text-6xl font-extrabold text-green-900 tracking-tight leading-tight drop-shadow-xl"
+            animate={{
+              scale: [1, 1.05, 1],
+              rotate: [0, 2, -2, 0],
+              textShadow: [
+                "0 0 10px rgba(34,197,94,0.8)",
+                "0 0 30px rgba(34,197,94,1)",
+                "0 0 10px rgba(34,197,94,0.8)"
+              ]
+            }}
+            transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+          >
             About Me
-          </h2>
+          </motion.h2>
+
           <p className="text-green-800 text-lg md:text-xl max-w-xl leading-relaxed">
             I’m{" "}
             <span className="font-semibold text-green-900 underline decoration-green-500 decoration-4">
@@ -90,15 +103,15 @@ export default function About() {
 
           <div className="space-y-6">
             {[{
-              icon: <FaUserGraduate className="text-green-600 text-4xl" />,
+              icon: <FaUserGraduate className="text-green-600 text-4xl drop-shadow-md animate-bounce" />,
               title: "Education",
               desc: "Diploma in English and Computer Technology, specialized in web development."
             }, {
-              icon: <FaLaptopCode className="text-green-600 text-4xl" />,
+              icon: <FaLaptopCode className="text-green-600 text-4xl drop-shadow-md animate-bounce" />,
               title: "Skills",
               desc: "React, JavaScript (ES6+), Tailwind CSS, Framer Motion, Git & GitHub."
             }, {
-              icon: <FaGlobeAmericas className="text-green-600 text-4xl" />,
+              icon: <FaGlobeAmericas className="text-green-600 text-4xl drop-shadow-md animate-bounce" />,
               title: "Goal",
               desc: "To build performant web experiences and keep learning cutting-edge technologies."
             }].map(({ icon, title, desc }, i) => (
@@ -110,7 +123,7 @@ export default function About() {
                   backgroundColor: "rgba(22, 163, 74, 0.15)",
                   boxShadow: "0 12px 35px rgba(22, 163, 74, 0.3)",
                 }}
-                className="flex items-start gap-6 rounded-xl p-6 cursor-default border border-green-200 bg-green-50 shadow-md transition"
+                className="flex items-start gap-6 rounded-xl p-6 cursor-default border border-green-300 shadow-5xl shadow-green-600/100 bg-green-50 transition"
               >
                 <div className="flex-shrink-0 mt-1">{icon}</div>
                 <div>
