@@ -121,7 +121,7 @@ export default function Skills() {
   return (
     <section
       id="skills"
-      className="min-h-screen bg-gradient-to-b from-green-100 via-white to-green-100 py-28 px-6 md:px-12 flex flex-col items-center"
+      className="min-h-screen bg-gradient-to-b  py-28 px-6 md:px-12 flex flex-col items-center"
     >
       <motion.h2
         className="text-5xl font-extrabold text-green-900 mb-16 tracking-wide drop-shadow-xl"

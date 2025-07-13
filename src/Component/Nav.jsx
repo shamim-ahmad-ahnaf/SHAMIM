@@ -1,103 +1,195 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaBars, FaTimes } from "react-icons/fa";
+import {
+  FaBars,
+  FaTimes,
+  FaHome,
+  FaUser,
+  FaCode,
+  FaProjectDiagram,
+  FaEnvelope,
+  FaFacebookF,
+  FaLinkedinIn,
+  FaGithub,
+  FaSearch
+} from "react-icons/fa";
+import { Link } from "react-scroll";
 
 const navLinks = [
-  { label: "Home", href: "#home" },
-  { label: "About", href: "#about" },
-  { label: "Projects", href: "#projects" },
-  { label: "Contact", href: "#contact" },
+  { label: "Home", to: "home", icon: <FaHome /> },
+  { label: "About", to: "about", icon: <FaUser /> },
+  { label: "Skills", to: "skills", icon: <FaCode /> },
+  { label: "Projects", to: "projects", icon: <FaProjectDiagram /> },
+  { label: "Contact", to: "contact", icon: <FaEnvelope /> },
 ];
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 80);
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
+    const handleScroll = () => setScrolled(window.scrollY > 60);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const menuVariants = {
-    hidden: { x: "100%" },
-    visible: { x: 0, transition: { type: "spring", stiffness: 300, damping: 30 } },
-    exit: { x: "100%", transition: { ease: "easeInOut", duration: 0.3 } },
+  useEffect(() => {
+    if (isOpen) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+  }, [isOpen]);
+
+  const handleBackdropClick = (e) => {
+    if (e.target.id === "drawer-backdrop") {
+      setIsOpen(false);
+    }
   };
 
   return (
-    <nav
-      className={`fixed w-full top-0 left-0 z-50 transition-all duration-500 ${
-        scrolled
-          ? "bg-white/90 backdrop-blur-md shadow-lg border-b border-green-200"
+    <motion.nav
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled
+          ? "bg-white/80 backdrop-blur-md shadow-md border-b border-green-200"
           : "bg-transparent"
-      }`}
+        }`}
+      initial={{ y: -60, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.7 }}
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 md:px-12 py-4">
-        {/* Logo */}
-        <a
-          href="#home"
-          className="text-3xl font-extrabold text-green-700 tracking-wide select-none"
-          aria-label="Shamim Ahmad Ahanaf Logo"
+        {/* Logo Section */}
+        <motion.div
+          className="text-green-700"
+          initial={{ scale: 0.9 }}
+          animate={{ scale: 1 }}
+          transition={{ type: "spring", stiffness: 200 }}
         >
-          ShamimAhanaf
-        </a>
+          <h1 className="text-2xl md:text-3xl font-extrabold">SHAMIM AHMAD</h1>
+          <p className="text-xs tracking-widest text-green-600 uppercase">
+            Web Developer
+          </p>
+        </motion.div>
 
-        {/* Desktop Links */}
-        <ul className="hidden md:flex space-x-12 text-lg font-medium text-gray-700">
-          {navLinks.map(({ label, href }) => (
-            <li key={label}>
-              <a
-                href={href}
-                className="relative group px-2 py-1 hover:text-green-600 transition-colors"
-                onClick={() => setIsOpen(false)}
+        {/* Desktop Nav */}
+        <ul className="hidden md:flex gap-10 items-center font-medium text-gray-700">
+          {navLinks.map((item, index) => (
+            <motion.li
+              key={index}
+              whileHover={{ scale: 1.1, color: "#16a34a" }}
+              transition={{ type: "spring", stiffness: 300 }}
+              className="flex items-center gap-2"
+            >
+              <span className="text-green-600">{item.icon}</span>
+              <Link
+                to={item.to}
+                spy={true}
+                smooth={true}
+                offset={-80}
+                duration={700}
+                className="cursor-pointer transition-colors duration-300"
               >
-                {label}
-                <motion.span
-                  className="absolute left-0 bottom-0 w-full h-0.5 bg-green-600 origin-left scale-x-0 group-hover:scale-x-100 transition-transform"
-                  layoutId="underline"
-                  initial={false}
-                />
-              </a>
-            </li>
+                {item.label}
+              </Link>
+            </motion.li>
           ))}
         </ul>
 
-        {/* Mobile Hamburger */}
-        <button
-          className="md:hidden text-3xl text-green-700 focus:outline-none"
-          aria-label={isOpen ? "Close menu" : "Open menu"}
-          onClick={() => setIsOpen(!isOpen)}
-        >
-          {isOpen ? <FaTimes /> : <FaBars />}
-        </button>
+        {/* Mobile Toggle Button */}
+        <div className="flex items-center gap-4">
+          {/* Search Icon (optional) */}
+          <FaSearch className="hidden md:block text-green-600 text-lg cursor-pointer" />
+          <button
+            className="md:hidden text-green-700 text-2xl"
+            onClick={() => setIsOpen(true)}
+            aria-label="Open menu"
+          >
+            <FaBars />
+          </button>
+        </div>
       </div>
 
-      {/* Mobile Menu Drawer */}
+      {/* Mobile Drawer with Backdrop */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="fixed top-0 right-0 w-64 h-full bg-white shadow-xl z-50 flex flex-col p-8"
-            variants={menuVariants}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
+            id="drawer-backdrop"
+            className="fixed inset-0 z-[9999] bg-black/40 flex justify-end"
+            onClick={handleBackdropClick}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
           >
-            <nav className="flex flex-col space-y-8 font-semibold text-gray-800 text-xl">
-              {navLinks.map(({ label, href }) => (
-                <a
-                  key={label}
-                  href={href}
-                  onClick={() => setIsOpen(false)}
-                  className="hover:text-green-600 transition-colors"
-                >
-                  {label}
+            <motion.div
+              className="w-72 h-full bg-white p-6 relative flex flex-col justify-start gap-8"
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ duration: 0.4 }}
+            >
+              {/* Close Button */}
+              <button
+                className="absolute top-4 right-4 text-green-700 text-2xl"
+                onClick={() => setIsOpen(false)}
+              >
+                <FaTimes />
+              </button>
+
+              {/* Header Name */}
+              <div className="text-center mt-8">
+                <h2 className="text-xl font-bold text-green-700">
+                  SHAMIM AHMAD 
+                </h2>
+                <p className="text-sm text-green-500 uppercase">Web Developer</p>
+              </div>
+
+              {/* Search Input */}
+
+
+              {/* Navigation Links */}
+              <div className="flex flex-col gap-6 font-semibold text-lg text-green-700 mt-4">
+                {navLinks.map((item, index) => (
+                  <Link
+                    key={index}
+                    to={item.to}
+                    spy={true}
+                    smooth={true}
+                    offset={-80}
+                    duration={700}
+                    onClick={() => setIsOpen(false)}
+                    className="cursor-pointer hover:text-green-600 flex items-center gap-3"
+                  >
+                    <span>{item.icon}</span>
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+              <div className="mt-4">
+                <input
+                  type="text"
+                  placeholder="Search..."
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  className="w-full border border-green-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-400"
+                />
+              </div>
+              {/* Social Icons */}
+              <div className="mt-auto flex justify-center gap-6 pt-6 border-t border-gray-200">
+                <a href="https://facebook.com" target="_blank" rel="noreferrer">
+                  <FaFacebookF className="text-green-700 hover:text-green-500 text-xl" />
                 </a>
-              ))}
-            </nav>
+                <a href="https://linkedin.com" target="_blank" rel="noreferrer">
+                  <FaLinkedinIn className="text-green-700 hover:text-green-500 text-xl" />
+                </a>
+                <a href="https://github.com" target="_blank" rel="noreferrer">
+                  <FaGithub className="text-green-700 hover:text-green-500 text-xl" />
+                </a>
+              </div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
-    </nav>
+    </motion.nav>
   );
 }

@@ -34,7 +34,7 @@ export default function About() {
   return (
     <section
       id="about"
-      className="min-h-screen bg-gradient-to-br from-green-50 via-green-100 to-white py-28 px-6 md:px-12 flex items-center"
+      className="min-h-screen bg-white py-28 px-6 md:px-12 flex items-center"
     >
       <motion.div
         className="max-w-6xl mx-auto rounded-3xl p-6 md:p-14 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-center"

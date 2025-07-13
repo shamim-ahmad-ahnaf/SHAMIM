@@ -77,7 +77,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="min-h-screen flex items-center justify-center bg-gradient-to-r from-green-50 to-white px-6 relative overflow-hidden"
+      className="min-h-screen flex items-center justify-center bg-gradient-to-r from-green-50 to-white px-6 relative overflow-hidden mt-18"
     >
       <div className="max-w-7xl mx-auto flex flex-col-reverse md:flex-row items-center gap-12 py-20">
         {/* Text Content */}
