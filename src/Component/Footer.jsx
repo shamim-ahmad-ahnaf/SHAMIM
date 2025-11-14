@@ -1,8 +1,8 @@
 import React from "react";
 import {
   FaFacebookF,
-  FaLinkedinIn,
-  FaGithub,
+FaInstagram, 
+FaWhatsapp,
   FaEnvelope,
   FaPhoneAlt,
   FaMapMarkerAlt,
@@ -54,8 +54,7 @@ export default function Footer() {
             Shamim Ahmad Ahanaf
           </motion.h3>
           <motion.p className="leading-relaxed text-white/90">
-            Web Developer passionate about clean UI, fast performance, and smooth
-            user experience. Let's work together and create something awesome!
+            Data entry expert, passionate about fast performance and smooth user experience. Let's work together and create something great!
           </motion.p>
           <motion.div
             className="mt-6 space-y-2 text-sm text-white/90"
@@ -102,13 +101,13 @@ export default function Footer() {
             whileHover={{ scale: 1.05, color: "#22c55e" }}
             transition={{ type: "spring", stiffness: 300 }}
           >
-            Follow Me
+           Contact Me
           </motion.h4>
           <motion.div className="flex gap-5 mb-6 text-xl">
             {[
               { Icon: FaFacebookF, href: "#" },
-              { Icon: FaLinkedinIn, href: "#" },
-              { Icon: FaGithub, href: "#" },
+              { Icon: FaInstagram, href: "#" },
+              { Icon: FaWhatsapp, href: "#" },
             ].map(({ Icon, href }, idx) => (
               <motion.a
                 key={idx}
@@ -134,7 +133,7 @@ export default function Footer() {
           >
             Want to work together? <br />
             <a
-              href="mailto:shamim@example.com"
+              href="mailto:shamimahmadahnaf@gmail.com"
               className="underline hover:text-green-400"
               target="_blank"
               rel="noopener noreferrer"

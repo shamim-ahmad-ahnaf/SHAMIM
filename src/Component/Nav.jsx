@@ -66,9 +66,9 @@ export default function Navbar() {
           animate={{ scale: 1 }}
           transition={{ type: "spring", stiffness: 200 }}
         >
-          <h1 className="text-2xl md:text-3xl font-extrabold">SHAMIM AHMAD</h1>
+          <h1 className="text-2xl md:text-3xl font-extrabold cursor-pointer">SHAMIM AHMAD</h1>
           <p className="text-xs tracking-widest text-green-600 uppercase">
-            Web Developer
+           Data Entry Specialist
           </p>
         </motion.div>
 
@@ -101,7 +101,7 @@ export default function Navbar() {
           {/* Search Icon (optional) */}
           <FaSearch className="hidden md:block text-green-600 text-lg cursor-pointer" />
           <button
-            className="md:hidden text-green-700 text-2xl"
+            className="md:hidden text-green-700 text-2xl cursor-pointer"
             onClick={() => setIsOpen(true)}
             aria-label="Open menu"
           >
@@ -130,7 +130,7 @@ export default function Navbar() {
             >
               {/* Close Button */}
               <button
-                className="absolute top-4 right-4 text-green-700 text-2xl"
+                className="absolute top-4 right-4 text-green-700 text-2xl cursor-pointer"
                 onClick={() => setIsOpen(false)}
               >
                 <FaTimes />
@@ -141,7 +141,7 @@ export default function Navbar() {
                 <h2 className="text-xl font-bold text-green-700">
                   SHAMIM AHMAD 
                 </h2>
-                <p className="text-sm text-green-500 uppercase">Web Developer</p>
+                <p className="text-sm text-green-500 uppercase">Data Entry Specialist</p>
               </div>
 
               {/* Search Input */}

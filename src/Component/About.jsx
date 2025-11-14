@@ -94,26 +94,24 @@ export default function About() {
           <p className="text-green-800 text-lg md:text-xl max-w-xl leading-relaxed">
             I’m{" "}
             <span className="font-semibold text-green-900 underline decoration-green-500 decoration-4">
-              Shamim Ahmad Ahanaf
+              Shamim Ahmad 
             </span>
-            , a passionate frontend developer focused on crafting smooth,
-            performant, and accessible web applications with React, Tailwind CSS,
-            and Framer Motion.
+               ,a passionate Data Entry Specialist dedicated to delivering fast, accurate, and well-organized data solutions using Excel, Google Sheets, and modern productivity tools.
           </p>
 
           <div className="space-y-6">
             {[{
               icon: <FaUserGraduate className="text-green-600 text-4xl drop-shadow-md animate-bounce" />,
               title: "Education",
-              desc: "Diploma in English and Computer Technology, specialized in web development."
+              desc: "Diploma in English and Computer Technology, specialized in Data Entry."
             }, {
               icon: <FaLaptopCode className="text-green-600 text-4xl drop-shadow-md animate-bounce" />,
               title: "Skills",
-              desc: "React, JavaScript (ES6+), Tailwind CSS, Framer Motion, Git & GitHub."
+              desc: "Skilled in all major data entry tasks, including data collection, formatting, mining, web research, and product listing.."
             }, {
               icon: <FaGlobeAmericas className="text-green-600 text-4xl drop-shadow-md animate-bounce" />,
               title: "Goal",
-              desc: "To build performant web experiences and keep learning cutting-edge technologies."
+              desc: "To leverage data entry skills to help organizations maintain accurate and efficient data systems."
             }].map(({ icon, title, desc }, i) => (
               <motion.div
                 key={i}

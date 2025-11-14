@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { toast } from "react-toastify";
-import { FaFacebook, FaLinkedin, FaGithub, FaPhoneAlt, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
+import { FaFacebook, FaInstagram, FaWhatsapp,  FaPhoneAlt, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function Contact() {
@@ -79,7 +79,7 @@ export default function Contact() {
                             type="submit"
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
-                            className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-full font-bold text-lg transition-all duration-300 shadow-lg shadow-green-400 animate-bounce"
+                            className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-full font-bold text-lg transition-all duration-300 shadow-lg shadow-green-400 animate-bounce cursor-pointer"
                         >
                             Send Message 🚀
                         </motion.button>
@@ -128,9 +128,9 @@ export default function Contact() {
 
 
                     <div className="flex gap-5 pt-4 text-2xl animate-bounce">
+                        <a href="#" className="text-green-700 transition"><FaWhatsapp /></a>
                         <a href="#" className="text-blue-900 transition"><FaFacebook /></a>
-                        <a href="#" className="text-blue-900 transition"><FaLinkedin /></a>
-                        <a href="#" className="hover:text-green-900 transition"><FaGithub /></a>
+                        <a href="#" className="text-pink-600 transition"><FaInstagram /></a>
                     </div>
                 </motion.div>
             </div>
